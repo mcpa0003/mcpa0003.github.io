@@ -1,162 +1,289 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 
 <head>
-<title>Humdingers Page</title>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <title>Weather vs. Latitude</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="ResColstyle.css">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
 </head>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand" href="index.html" target="_blank">Weather vs. Latitude</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+    <ul class="nav navbar-nav">
+      <!-- <li class="active"><a href="#">Home</a></li>-->
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+	  <li><a href="data.html" target="_blank">Data</a></li>
+      <li><a href="comparisons.html" target="_blank">Comparisons</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Plots
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="max_temperature.html" target="_blank">Max Temperature</a></li>
+          <li><a href="humidity.html" target="_blank">Humidity</a></li>
+          <li><a href="cloudiness.html" target="_blank">Cloud Cover</a></li>
+		  <li><a href="windspeed.html" target="_blank">Wind Speed</a></li>
+        </ul>
+      </li>
+    </ul>
+    </div>
+  </div>
+</nav>
+<script>
+$(document).ready(function(){
+    $(".dropdown-toggle").dropdown();
+});
+</script>
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+</script>
+
 
 <body>
 
 
-<!-- Header -->
-<h1>Join The Humdingers!</h1>
+<div class="container">
 
-<!-- Image -->
-<img src="https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/227884_7350259507_5116_n.jpg?_nc_cat=109&_nc_ht=scontent-ort2-2.xx&oh=6ef6ad70eaec8f26697839eaad6f3ef4&oe=5C87C8CB" alt="Spongebob!" />
-<br>
+    <div class="row">
+	
+		<div class="col-md-1">
+			<h1></h1>
+		</div> 
+	
+	
+		<div class="col-md-3">
+			<h1 class="serif">Weather vs. Latitude</h1>
+			<p>Analysis on the role of latitude on various weather conditions</p>
+		</div>
+		
+		<div class="col-md-8">
+			<p>The purpose of this project was to analyze how weather changes as you get closer to the equator.  To accomplish this analysis, we first pulled data from the OpenWeatherMap API to assemble a dataset on over 500 cities.
+	After assembling the dataset, we used Matplotlib to plot various aspects of the weather vs. latitude.  Factors we looked at included: temperature, cloudiness, wind speed, and humidity.  This site provides the source data and visualizations created as part of the analysis, as well as explanations and descriptions of any trends and correlations.
+</p>
+		</div>
+		
+	</div>
+	
+</div>
 
-<!-- link that opens in a new tab -->
-<a href="https://www.urbandictionary.com/define.php?term=humdinger" target=_blank>link (to new tab)</a>
-<br>
-
-<strong><a href="https://www.collinsdictionary.com/us/dictionary/english/humdinger" target=_blank>BOLD link</a></strong>
-<br>
+<div class="container">
+   
+    
+	
 
 
-<!-- placeholder link -->
-<a href="#">placeholder link, goes nowhere, Humdingers!</a>
-
-<ol>
-  <li>Get 2 pieces of bread</li>
-  <li>Put meat and stuff inbetween the 2 slices of bread</li>
-  <li>Yum!</li>
-</ol>
+<div class="row">
+<div class="col-md-6">
 
 
+<a href="#" id="pop">
+    <img id="imageresource" src="assets/images/temperaturemap.png" style="width: 400px; height: 264px;">
+    Click to Enlarge
+</a>
 
-<!-- Header -->
-<h3>Bands that are approved by The Manager of The Humdingers</h3>
-<ul>
-  <li>The Manager of the Humdingers</li>
-  <li>Cauldron of Failure</li>
-  <li>Strabizmus</li>
-</ul>
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Image preview</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="imagepreview" style="width: 580px; height: 400px;" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
-  <table border="1">
-    <thead>
-      <tr>
-        <th colspan="4">Regional Sales Q1</th>
-      </tr>
-      <tr>
-        <th>Territory</th>
-        <th>Humdinger</th>
-        <th>Panhandle amt.</th>
-        <th>Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>South Central</td>
-        <td>Roger</td>
-        <td>$3,000</td>
-        <td>$24,700</td>
-      </tr>
-      <tr>
-        <td>South East</td>
-        <td>Martha</td>
-        <td>$1,500</td>
-      </tr>
-      <tr>
-        <td>South West</td>
-        <td>Dan</td>
-        <td>$1,000</td>
-      </tr>
-      <tr>
-        <td>North West</td>
-        <td>Jon</td>
-        <td>$4,000</td>
-      </tr>
-      <tr>
-        <td>North East</td>
-        <td>Jenny</td>
-        <td>$2,000</td>
-      </tr>
-      <tr>
-        <td>North East</td>
-        <td>Larry</td>
-        <td>$5,000</td>
-      </tr>
-      <tr>
-        <td>South East</td>
-        <td>Lonnie</td>
-        <td>$6,300</td>
-      </tr>
-      <tr>
-        <td>South West</td>
-        <td>Not Frank</td>
-        <td>$200</td>
-      </tr>
-      <tr>
-        <td>North West</td>
-        <td>Tully</td>
-        <td>$800</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="4">Q1 Employee Sales By Region</td>
-      </tr>
-    </tfoot>
-  </table>
+<div class="col-md-6">
 
-  <section>
-    <h1>WeatherPy</h1>
-    <article>
-    <a target="_blank" href="Fig1.png">
-      <img src="assets/images/cloudymap.png" alt="Cloudy Map">
-    </a>
-    <p><em>Cloudy Map</em></p>
-    </article>
-    <hr>
-    <article>
-    <a target="_blank" href="assets/images/humiditymap.png">
-    <img src="Fig2.png" alt="Humidity Map">
-    </a>
-    <p><em>Humidity Map</em></p>
-    </article>
-    <hr>
-    <article>
-      <a href="Fig3.png">
-      <img target="_blank" src="assets/images/temperaturemap.png" alt="Tempurature Map">
+<a href="#" id="pop2">
+    <img id="imageresource2" src="assets/images/humiditymap.png" style="width: 400px; height: 264px;">
+    Click to Enlarge
+</a>
+
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="imagemodal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel2">Image preview</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="imagepreview2" style="width: 580px; height: 400px;" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+
+
+<script> 
+$("#pop2").on("click", function() {
+   $('#imagepreview2').attr('src', $('#imageresource2').attr('src')); // here asign the image to the modal when the user click the enlarge link
+   $('#imagemodal2').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+});
+</script>
+
+<script> 
+$("#pop").on("click", function() {
+   $('#imagepreview').attr('src', $('#imageresource').attr('src')); // here asign the image to the modal when the user click the enlarge link
+   $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+});
+</script>
+	
+<div class="row">
+<div class="col-md-6">
+
+
+<a href="#" id="pop3">
+    <img id="imageresource3" src="assets/images/windmap.png" style="width: 400px; height: 264px;">
+    Click to Enlarge
+</a>
+
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="imagemodal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel3">Image preview</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="imagepreview3" style="width: 580px; height: 400px;" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script> 
+$("#pop3").on("click", function() {
+   $('#imagepreview3').attr('src', $('#imageresource3').attr('src')); // here asign the image to the modal when the user click the enlarge link
+   $('#imagemodal3').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+});
+</script>
+
+<div class="col-md-6">
+
+<a href="#" id="pop4">
+    <img id="imageresource4" src="assets/images/cloudymap.png" style="width: 400px; height: 264px;">
+    Click to Enlarge
+</a>
+
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="imagemodal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel4">Image preview</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="imagepreview4" style="width: 580px; height: 400px;" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+
+<script> 
+$("#pop4").on("click", function() {
+   $('#imagepreview4').attr('src', $('#imageresource4').attr('src')); // here asign the image to the modal when the user click the enlarge link
+   $('#imagemodal4').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+});
+</script>
+	
+ <div class="row">
+  <div class="col-md-3">
+    <div class="thumbnail">
+      <a target="_blank" href="assets/images/windmap.png">
+        <img src="assets/images/windmap.png" alt="Wind Speed Map" width="100%">
+        <div class="caption">
+          <p>Wind Speed Map</p>
+        </div>
       </a>
-      <p><em>Temperature Map</em></p>
-    </article>
-    <hr>
-    <!-- an example using figure/ficaption -->
-    <figure>
-      <a target="_blank" href="Fig4.png">
-      <img src="assets/images/windmap.png" alt="Wind Map">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="thumbnail">
+      <a target="_blank" href="assets/images/cloudymap.png">
+        <img src="assets/images/cloudymap.png" alt="Cloudiness Map" width="100%">
+        <div class="caption">
+          <p>Cloud Cover Map</p>
+        </div>
       </a>
-      <figcaption><em>Wind Map</em></figcaption>
-    </figure>
-  </section>
-
-
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="thumbnail">
+      <a target="_blank" href="assets/images/humiditymap.png">
+        <img src="assets/images/humiditymap.png" alt="Humidity Map" width="100%">
+        <div class="caption">
+          <p>Humidity Map</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="thumbnail">
+      <a target="_blank" href="assets/images/temperaturemap.png">
+        <img src="assets/images/temperaturemap.png" alt="Temperature Map" width="100%">
+        <div class="caption">
+          <p>Temperature Map</p>
+        </div>
+      </a>
+    </div>
+  </div>
+ </div>
+		 
+    
+</div>
 
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-<
-
-
